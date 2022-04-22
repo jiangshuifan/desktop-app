@@ -6,6 +6,14 @@ import store from './store'
 import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
+import directiveList from './directive/index'
+
+console.log(directiveList)
+directiveList.forEach(directive=>{
+  Vue.directive(directive.name,{
+    ...directive.config
+  })
+})
 
 Vue.use(VXETable)
 Vue.use(ElementUI);

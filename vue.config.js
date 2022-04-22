@@ -6,8 +6,12 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('src'),
+        'static':resolve('static')
       }
     },
+  },
+  devServer:{
+    contentBase:path.resolve('src')
   }
 }

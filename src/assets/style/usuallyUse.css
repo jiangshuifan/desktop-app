@@ -1,0 +1,36 @@
+.p-absolute{
+  position: absolute;
+}
+
+.d-flex{
+  display: flex;
+}
+
+.flex-column{
+  display:flex;
+  flex-direction: column;
+}
+
+.jc-sa{
+  justify-content: space-around;
+}
+
+.flex-ai-c{
+  display: flex;
+  align-items: center;
+}
+
+.flex-1{
+  flex:1
+}
+
+.full-height{
+  height:100%
+}
+
+.full-width{
+  width:100%
+}
+.cursor-pointer{
+  cursor: pointer;
+}

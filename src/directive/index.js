@@ -1,4 +1,3 @@
-import Vue from 'vue';
 //#region directive知识点
 /**五个钩子
  * @bind 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
@@ -30,12 +29,31 @@ import Vue from 'vue';
  */
 //#endregion
 
+
 //#region 拖拽
 const draggable ={
   name:'draggable',
   config: {
     bind(el){
       el.setAttribute('draggable',true)
+      // el.ondragstart=(event)=>{
+      //   for (let i in event.target){
+      //     console.log(i,event.target[i])
+      //   }
+      // }
+    }
+  }
+}
+//#endregion
+
+//#region 
+const dragBox = {
+  name:'drag-box',
+  config: {
+    bind(el){
+      el.ondrop=(event)=>{
+        event.preventDefault();
+      }
     }
   }
 }
@@ -51,4 +69,4 @@ const draggable ={
   }
 }
 //#endregion
-export default [draggable,debounce]
+export default [draggable,dragBox,debounce]

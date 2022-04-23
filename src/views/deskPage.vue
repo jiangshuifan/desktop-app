@@ -5,8 +5,8 @@
     </div>
     <div class="app-map flex-column jc-sa" >
       <div v-for='item in rowsNum' :key="item" :class="['d-flex','flex-ai-c','jc-sa','app-row-'+item]" :style="{height:appHeight+'px'}">
-        <div v-for="num in columnsNum" :class="['full-height','app-column-'+num]"  @click="handleGetCurrentPosition(item,num)" :key="num" :style="{width:appWidth+'px'}">
-          <AppLink  @open="handleOpenApp(pageConfig[item*columnsNum+num].appIndex)" v-if="pageConfig[item*columnsNum+num]" :text='pageConfig[item*columnsNum+num].appName' :icon='pageConfig[item*columnsNum+num].appIcon' ></AppLink>
+        <div v-for="num in columnsNum" v-drag-box :class="['full-height','app-column-'+num]" @dragend="handleDragEnd" @dragenter="handleDragEnter(item,num)" :key="num" :style="{width:appWidth+'px'}">
+          <AppLink @drag="handleDragApp(pageConfig[item*columnsNum+num],item,num)" @open="handleOpenApp(pageConfig[item*columnsNum+num].appIndex)" v-if="pageConfig[item*columnsNum+num]" :text='pageConfig[item*columnsNum+num].appName' :icon='pageConfig[item*columnsNum+num].appIcon' ></AppLink>
         </div>
       </div>
     </div>
@@ -24,19 +24,36 @@ export default {
   },
   data(){
     return {
-      appWidth:60,
-      appHeight:80,
-      rowsNum:0,
-      columnsNum:0,
-      appList:[
+      appWidth:60,//单个app格子宽度
+      appHeight:80,//单个app格子高度
+      rowsNum:0,//页面格子行数
+      columnsNum:0,//页面格子列数
+      appList:[//app列表
         {name:'app1',index:'/app1',icon:'APP.png',row:1,column:2},
         {name:'app2',index:'/app2',icon:'APP2.png',row:3,column:1},
         {name:'app3',index:'/app3',icon:'APP.png',row:4,column:2},
       ],
-      pageConfig:[]
+      targetRowIndex:0,
+      targetColumnIndex:0,
+      hasAppDrag :false
+    }
+  },
+  computed:{
+    pageConfig(){
+      let appMap=new Array(this.rowsNum*this.columnsNum)
+      this.appList.forEach(app=>{
+        let point = app.row*this.columnsNum+app.column
+        appMap[point]={
+          appName:app.name,
+          appIcon:app.icon,
+          appIndex:app.index,
+        }
+      })
+      return appMap
     }
   },
   methods:{
+    //获取视窗宽高
     getWindowSize(){
      let height = this.$refs.desktopBack.clientHeight
      let width = this.$refs.desktopBack.clientWidth
@@ -45,6 +62,7 @@ export default {
        width
      }
     },
+    //初始化页面格子数.没有监听页面resize，目前默认窗口不变
     initPageInfo(){
       const { height, width }=this.getWindowSize()
       const rowsNum = parseInt(height / (this.appHeight+16))
@@ -52,29 +70,45 @@ export default {
       console.log(rowsNum,columnsNum)
       this.rowsNum=rowsNum
       this.columnsNum=columnsNum
-      this.appIconRender()
     }, 
-    appIconRender(){
-      let appMap=new Array(this.rowsNum*this.columnsNum)
-      this.appList.forEach(app=>{
-        let point = app.row*this.columnsNum+app.column
-        appMap[point]={
-          appName:app.name,
-          appIcon:app.icon,
-          appIndex:app.index
-        }
-      })
-      this.pageConfig = appMap
-    },
+    //双击打开应用，后面会想做成弹框
     handleOpenApp(route){
       history.pushState(null,route,route)
     },
-    handleGetCurrentPosition (row,column){
-      console.log(row,column)
+    //获取当前拖动的APP
+    handleDragApp(info,row,column){
+      this.draggingApp=  this.appList.find(v=>{return v.name==info.appName})
+      this.hasAppDrag=true
+      this.targetRowIndex = row
+      this.targetColumnIndex = column
     },
-    handleStartDrag(e){
-      console.log(e)
+    //暂存刚刚拖放经过的容器位置
+    handleDragEnter(row,column){
+      if((this.targetRowIndex!==row||this.targetColumnIndex!==column)&&this.pageConfig[row*this.columnsNum+column]){
+        console.log( this.targetRowIndex,row)
+        console.log( this.targetColumnIndex,column)
+        console.log('目标格子有内容，不能放入')
+      }else if((this.targetRowIndex!==row||this.targetColumnIndex!==column)&&!this.pageConfig[row*this.columnsNum+column]){
+        //目标无内容
+        this.targetRowIndex=row
+        this.targetColumnIndex = column
+      }
+      // if((this.targetRowIndex!==row||this.targetColumnIndex!==column)&&this.pageConfig[this.targetRowIndex*this.columnsNum+this.targetRowIndex]){
+      //   console.log(this.pageConfig[this.targetRowIndex*this.columnsNum+this.targetRowIndex])
+      //   console.log( this.targetRowIndex,row)
+      //   console.log( this.targetColumnIndex,column)
+      // }
+    },
+    //拖放结束
+    handleDragEnd(){
+      //目标容器无内容
+      if(this.hasAppDrag){
+        this.draggingApp.row = this.targetRowIndex
+        this.draggingApp.column =this.targetColumnIndex
+      }
+      this.hasAppDrag = false
     }
+    //多个选中
   },
   created(){
    

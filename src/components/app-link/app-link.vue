@@ -1,5 +1,5 @@
 .<template>
-  <div @dragstart="$emit('drag')"  @dblclick="handleDblClickApp" v-draggable  class="app-item">
+  <div @dragstart="$emit('drag')" @mousemove.stop="$emit('move')"  @mousedown.stop="$emit('clickdown')"  @click.stop="handleClickApp"  @dblclick="handleDblClickApp" v-draggable  :class="{'app-item':true}">
     <!-- <div :style="{'background-image':'url('+require(icon)+')'}"></div> -->
     <img  style="width:100%;padding:4px;-webkit-user-drag:none" :src="require('../../../static/images/app-icon/'+icon)" alt="" srcset="">
     <div :style="{color:'white','font-size':fontSize+'px','text-align':'center','padding':'3px'}">{{text}}</div>
@@ -18,6 +18,10 @@ export default {
   methods:{
     handleDblClickApp(){
      this.$emit('open')
+    },
+    handleClickApp(e){
+      console.log(e)
+     this.$emit('click')
     }
   },
   props:{
@@ -38,8 +42,8 @@ export default {
       default(){
         return 12
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -49,10 +53,11 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 0.2px solid transparent;
 }
   .app-item:hover{
     background-color: rgba($color: #fff, $alpha: 0.12);
-      box-shadow: 0 0 2px white;
+    box-shadow: 0 0 2px white;
   }
 
 </style>

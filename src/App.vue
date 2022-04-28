@@ -6,6 +6,7 @@
 
 <script>
 import Home from './views/deskPage.vue'
+
 export default {
   name: 'App',
   components: {

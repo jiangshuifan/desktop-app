@@ -11,17 +11,19 @@
           :style="{width:appWidth+'px'}"
         >
             <AppLink 
-              @clickdown ='showCanvas=false'
+              @clickdown ='handleAppClickDown(pageConfig[item*columnsNum+num].appName)'
               @move='showCanvas=false'
               @drag="handleDragApp(pageConfig[item*columnsNum+num],item,num)" 
               @click="handleActiveApp(pageConfig[item*columnsNum+num].appName)" 
+              :style="{'box-shadow':activedApps.indexOf(pageConfig[item*columnsNum+num].appName)!==-1?`0 0 2px ${appBackColor}`:'' }"
               :class="{
                 'app-active':activedApps.indexOf(pageConfig[item*columnsNum+num].appName)!==-1,
                 'app-with-border':hasBorderApp===pageConfig[item*columnsNum+num].appName}" 
-              @open="handleOpenApp(pageConfig[item*columnsNum+num].appIndex)" 
+              @open="handleOpenApp(pageConfig[item*columnsNum+num],item,num)" 
               v-if="pageConfig[item*columnsNum+num]" 
               :text='pageConfig[item*columnsNum+num].appName' 
               :icon='pageConfig[item*columnsNum+num].appIcon' 
+              :app-back-color='appBackColor'
             >
             </AppLink>
         </div>
@@ -32,6 +34,7 @@
         canvas-id='desktop-back'  
         :height='canvasHeight' 
         :width='canvasWidth' 
+        @render-end='handleRenderFontStyle'
         :src="require('@/assets/images/desktopImage/bg.jpg')"
          />
      <DRect :class="{'destop-canvas':true,'show-foremost':!showCanvas}" 
@@ -47,6 +50,7 @@
       :origin ='rectOrigin'
       :use-origin='true'
        />
+      <Explore ref="exploreModal" :visible='showExplore' :tab='openedApp' @remove-tab='handleCloseApp' @hidden='handleHideExplore' class="" />
   </div>
   
 </template>
@@ -55,11 +59,13 @@
 import AppLink from '@/components/app-link/app-link'
 import DRect from "@/components/canvas/rect"
 import DImage from "@/components/canvas/image"
+import Explore from "@/components/explore/explorer"
+import microAPP from "../micro-app"
 
 export default {
   name:'home',
   components:{
-   AppLink,DRect,DImage
+   AppLink,DRect,DImage,Explore
   },
   data(){
     return {
@@ -67,31 +73,30 @@ export default {
       appHeight:90,//单个app格子高度
       rowsNum:0,//页面格子行数
       columnsNum:0,//页面格子列数
-      appList:[//app列表
-        {name:'app1',index:'/app1',icon:'APP.png',row:1,column:2},
-        {name:'app2',index:'/app2',icon:'APP2.png',row:4,column:7},
-        {name:'app3',index:'/app3',icon:'APP.png',row:5,column:9},
-      ],
+      appList:[],
       targetRowIndex:0,
       targetColumnIndex:0,
       hasAppDrag :false,
       showCanvas:false,
-      activedApps:[],
+      showExplore:false,
+      activedApps:[],//选中的app,用来控制样式
+      openedApp:[],//已打开的app
       hasBorderApp:'',//选中项加border
-      canvasHeight:0,
+      canvasHeight:0,//背景图和画板宽高
       canvasWidth:0,
-      rectOrigin:{}
+      rectOrigin:{},//绘制长方形的起始位置
+      appBackColor:'#fff',
     }
   },
   computed:{
     pageConfig(){
       let appMap=new Array(this.rowsNum*this.columnsNum)
       this.appList.forEach(app=>{
-        let point = app.row*this.columnsNum+app.column
+        let point = app.props.row*this.columnsNum+app.props.column
         appMap[point]={
           appName:app.name,
-          appIcon:app.icon,
-          appIndex:app.index,
+          appIcon:app.props.icon,
+          appIndex:app.activeRule,
         }
       })
       return appMap
@@ -129,9 +134,36 @@ export default {
     //   this.activedApps=[]
     //   this.hasBorderApp=''
     // },
+    handleCloseApp(app){
+      let appPosition =  this.openedApp.findIndex(v=>{
+        if(v.title===app){
+          return true
+        }
+      })
+      this.openedApp.splice(appPosition,1)
+    },
     //双击打开应用，后面会想做成弹框
-    handleOpenApp(route){
-      history.pushState(null,route,route)
+    handleOpenApp(app,row,column){
+      let appPosition =  this.openedApp.findIndex(v=>{
+        if(v.title===app.appName){
+          return true
+        }
+      })
+      if(appPosition===-1){
+        this.openedApp.push({
+         title:app.appName,
+         name:app.appIndex
+        })
+        this.showExplore=true
+      }else{
+        this.showExplore=true
+      }
+      this.$refs.exploreModal.activeTab(app.appIndex)
+    },
+    //
+    handleAppClickDown(info){
+      this.showCanvas=false
+      this.handleActiveApp(info)
     },
     //获取当前拖动的APP
     handleDragApp(info,row,column){
@@ -156,8 +188,9 @@ export default {
     handleDragEnd(){
       //目标容器无内容
       if(this.hasAppDrag){
-        this.draggingApp.row = this.targetRowIndex
-        this.draggingApp.column =this.targetColumnIndex
+        this.draggingApp.props.row = this.targetRowIndex
+        this.draggingApp.props.column =this.targetColumnIndex
+        this.saveAppPosition()
       }
       this.hasAppDrag = false
     },
@@ -179,6 +212,7 @@ export default {
       }
       this.showCanvas=false
     },
+    //点击后确定绘制方形起始位置
     handleChangeCanvasState(e){
       const { clientX, clientY } = e
       this.rectOrigin= {
@@ -188,16 +222,39 @@ export default {
       this.showCanvas=true
       this.activedApps=[]
       this.hasBorderApp=''
+    },
+    handleRenderFontStyle(rgb){
+      let r =parseInt(rgb.r)
+      let g =parseInt(rgb.g)
+      let b =parseInt(rgb.b)
+      let arr = [r,g,b]
+      arr.forEach((v,i)=>{
+        if(v>128){
+          arr[i]=v-127
+        }else{
+          arr[i]=v+127
+        }
+      })
+      this.appBackColor =`rgb(${arr.join(',')})`
+    },
+    saveAppPosition(){
+      localStorage.setItem('deskTopApp-position',JSON.stringify(this.appList))
+    },
+    //关闭弹窗
+    handleHideExplore(){
+      this.showExplore=false
     }
   },
   created(){
    this.canvasWidth=window.document.body.clientWidth
    this.canvasHeight= window.document.body.clientHeight
+   this.appList = microAPP
   },
   mounted(){
      this.initPageInfo()
      window.onclick=this.handleWindowClick
      window.oncontextmenu=this.hanldeWindowRightClick
+     this.showExplore=true
   },
   beforeDestroy(){
     window.onclick=null
@@ -232,7 +289,7 @@ export default {
 }
 .app-active{
   background-color: rgba($color: #fff, $alpha: 0.12);
-  box-shadow: 0 0 2px white;
+  backdrop-filter:blur(8px);
   color: cyan;
 }
 .app-with-border{

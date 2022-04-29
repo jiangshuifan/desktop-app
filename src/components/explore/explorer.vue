@@ -1,8 +1,8 @@
 .<template>
   <vxe-modal
     class="explore-modal"
-    height="800"
-    width="1000"
+    height="80%"
+    width="80%"
     :lock-view='false'
     :mask='false'
     :show-zoom="true"
@@ -65,19 +65,17 @@ export default {
   },
   methods:{
      activeTab(tabName){
-       console.log(tabName+'')
        this.currentTab=tabName+''
        history.pushState(null,tabName,tabName)
      },
      handleSelectTab(tab){
        history.pushState(null,tab,tab)
      },
-     handleTabsEdit(targetName, action) {
-        let currentTab = this.currentTab
+     async handleTabsEdit(targetName, action) {
         if (action === 'add') {
           this.activeTab(++this.tabIndex+'')
           this.attachedTabs.push({
-            title: 'New Tab',
+            title: 'New Tab'+this.tabIndex,
             name: this.tabIndex+'',
           });
         }
@@ -88,19 +86,40 @@ export default {
             }
           })
           if(tabIndex!==-1){
-            this.$emit('remove-tab',targetName)
+            if(this.tabList.length>1||this.targetTabs.length>1){
+              this.$emit('remove-tab',targetName)
+              this.activeTab(this.targetTabs[tabIndex].name)
+            }else{
+              this.$emit('remove-tab',targetName)
+              this.currentTab=''
+              history.replaceState(null,null,'/')
+            }
           }else{
             let attachIndex = this.attachedTabs.findIndex(tab=>{
-              if(tab.name===targetName){
-                return
-              }
+               return tab.name===(targetName+'')
             })
+            // console.log(attachIndex,this.attachedTabs.length-1)
             if(attachIndex===this.attachedTabs.length-1){
               this.attachedTabs.splice(attachIndex,1)
-              this.activeTab((this.attachedTabs.length-1).name)
+              let len = this.attachedTabs.length
+              if(len>0){
+                this.activeTab((this.attachedTabs[len-1]).name)
+              }else{
+                let tabListLen =this.tabList.length
+                if(tabListLen>0){
+                  this.activeTab(this.tabList[tabListLen-1].name)
+                }else{
+                   this.currentTab=''
+                   history.replaceState(null,null,'/')
+                }
+              }
             }else{
-              this.attachedTabs.splice(attachIndex,1)
-              this.activeTab(attachIndex.name)
+              if(this.currentTab===targetName){
+                this.attachedTabs.splice(attachIndex,1)
+                 this.activeTab((this.attachedTabs[attachIndex]).name)
+              }else{
+                this.attachedTabs.splice(attachIndex,1)
+              }
             } 
           }
         }

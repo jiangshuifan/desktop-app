@@ -141,6 +141,9 @@ export default {
         }
       })
       this.openedApp.splice(appPosition,1)
+      if(this.openedApp.length===0){
+        history.replaceState(null,null,'/')
+      }
     },
     //双击打开应用，后面会想做成弹框
     handleOpenApp(app,row,column){

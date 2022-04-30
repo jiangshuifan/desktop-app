@@ -153,9 +153,10 @@ export default {
           }
 
           .el-tabs__nav{
-            border-radius: none;
+            border-radius: 0 !important;
 
             .el-tabs__item{
+              min-width:100px;
               height: 24px;
               line-height: 24px;  
               align-items: center;
@@ -169,8 +170,8 @@ export default {
           }
 
           .is-closable:hover{
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
           }
 
           .el-tabs__nav-wrap{
@@ -184,6 +185,10 @@ export default {
   ::v-deep .vxe-modal--wrapper{
     .vxe-modal--box{
       border-radius: none;
+
+      .vxe-modal--header{
+        border-radius:0;
+      }
     }
   }
 </style>

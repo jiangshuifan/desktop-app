@@ -5,8 +5,17 @@ const resolve = (dir) => {
 }
 
 module.exports = {
+
   // 告诉子应用在这个地址加载静态资源，否则会去基座应用的域名下加载
   publicPath: '/component',
+
+  //修改入口文件
+  pages:{
+    index: {
+      entry:'examples/main.js'
+    }
+  },
+
   // 开发服务器
   devServer: {
     port: process.env.VUE_APP_PORT,
@@ -24,7 +33,7 @@ module.exports = {
     },
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('examples')
       }
     },
   }

@@ -1,0 +1,4 @@
+{
+  "drag":"./packages/drag/index.js",
+  "grid":"./packages/grid/index.js"
+}

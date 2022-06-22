@@ -1,95 +1,23 @@
 .<template>
   <div class='sh-ui'>
-     <SuiGrid type="aside-main">
+     <SuiGrid type="header-main">
+       <template #header>
+         <div  class="full-height" style="height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;">
+           <h2>g-UI组件库</h2>
+           <div>目录</div>
+         </div>
+       </template>
        <template #main>
-         <SuiGrid type="header-main-footer">
-           <template #main>
-             <div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
-              <div>2</div>
+         <SuiGrid type="aside-main">
+           <template #aside>
+             <div class="full-height" style="background-color:#00ffff77">
+               组件列表
              </div>
+           </template>
+           <template #main>
+            <div class="full-height" style="background-color:#00ffff22">
+              组件markdown文件内容
+            </div>
            </template>
          </SuiGrid>
        </template>

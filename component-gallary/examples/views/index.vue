@@ -10,13 +10,13 @@
        <template #main>
          <SuiGrid type="aside-main">
            <template #aside>
-             <div class="full-height" style="background-color:#00ffff77">
+             <div class="full-height" >
                组件列表
              </div>
            </template>
            <template #main>
-            <div class="full-height" style="background-color:#00ffff22">
-              组件markdown文件内容
+            <div class="full-height overflow-auto" >
+             <TEST></TEST>
             </div>
            </template>
          </SuiGrid>
@@ -27,9 +27,11 @@
 
 <script>
 import SuiGrid from '../../packages/grid/src/main.vue'
+import TEST from '../../build/md-loader/test.vue'
 export default {
   components:{
-    SuiGrid
+    SuiGrid,
+    TEST
   }
 }
 </script>

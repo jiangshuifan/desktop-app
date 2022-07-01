@@ -1,370 +1,329 @@
 
   <template>
     <div>
-    <h2>Alert 警告</h2>
-<p>用于页面中展示重要的提示信息。</p>
-<h3>基本用法</h3>
-<p>页面中的非浮层元素，不会自动消失。</p>
+    <h2>Tag 标签</h2>
+<p>用于标记和选择。</p>
+<h3>基础用法</h3>
 <div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    Alert 组件提供四种主题，由`type`属性指定，默认值为`info`。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;成功提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;消息提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;警告提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;错误提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;error&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;成功提示的文案&quot;
-    type=&quot;success&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;消息提示的文案&quot;
-    type=&quot;info&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;警告提示的文案&quot;
-    type=&quot;warning&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;错误提示的文案&quot;
-    type=&quot;error&quot;&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
+                    <GuiDemoBlock>
+                      <template #demo-tip>
+                        由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
+                      </template>
+                  </GuiDemoBlock>
+                  <!--component-demo: <el-tag>标签一</el-tag>
+<el-tag type="success">标签二</el-tag>
+<el-tag type="info">标签三</el-tag>
+<el-tag type="warning">标签四</el-tag>
+<el-tag type="danger">标签五</el-tag> :component-demo-->
+          <pre v-pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span>&gt;</span>标签一<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;success&quot;</span>&gt;</span>标签二<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;info&quot;</span>&gt;</span>标签三<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;warning&quot;</span>&gt;</span>标签四<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;danger&quot;</span>&gt;</span>标签五<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
 </code></pre>
 </div>
-<h3>主题</h3>
-<p>Alert 组件提供了两个不同的主题：<code>light</code>和<code>dark</code>。</p>
+<h3>可移除标签</h3>
 <div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    通过设置`effect`属性来改变主题，默认为`light`。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;成功提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;effect=&quot;dark&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;消息提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;effect=&quot;dark&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;警告提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;effect=&quot;dark&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;错误提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;error&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;effect=&quot;dark&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;成功提示的文案&quot;
-    type=&quot;success&quot;
-    effect=&quot;dark&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;消息提示的文案&quot;
-    type=&quot;info&quot;
-    effect=&quot;dark&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;警告提示的文案&quot;
-    type=&quot;warning&quot;
-    effect=&quot;dark&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;错误提示的文案&quot;
-    type=&quot;error&quot;
-    effect=&quot;dark&quot;&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
-</code></pre>
-</div>
-<h3>自定义关闭按钮</h3>
-<p>自定义关闭按钮为文字或其他符号。</p>
-<div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    在 Alert 组件中，你可以设置是否可关闭，关闭按钮的文本以及关闭时的回调函数。`closable`属性决定是否可关闭，接受`boolean`，默认为`true`。你可以设置`close-text`属性来代替右侧的关闭图标，注意：`close-text`必须为文本。设置`close`事件来设置关闭时的回调。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;不可关闭的&nbsp;alert&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;:closable=&quot;false&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;自定义&nbsp;close-text&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;close-text=&quot;知道了&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;设置了回调的&nbsp;alert&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;@close=&quot;hello&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
+                    <GuiDemoBlock>
+                      <template #demo-tip>
+                        设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
+                      </template>
+                  </GuiDemoBlock>
+                  <!--component-demo: <el-tag
+  v-for="tag in tags"
+  :key="tag.name"
+  closable
+  :type="tag.type">
+  {{tag.name}}
+</el-tag>
 
-&lt;script&gt;
-&nbsp;&nbsp;export&nbsp;default&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;methods:&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hello()&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;Hello&nbsp;World!&#39;);
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;}
-&lt;/script&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;不可关闭的 alert&quot;
-    type=&quot;success&quot;
-    :closable=&quot;false&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;自定义 close-text&quot;
-    type=&quot;info&quot;
-    close-text=&quot;知道了&quot;&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;设置了回调的 alert&quot;
-    type=&quot;warning&quot;
-    @close=&quot;hello&quot;&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
+<script>
   export default {
+    data() {
+      return {
+        tags: [
+          { name: '标签一', type: '' },
+          { name: '标签二', type: 'success' },
+          { name: '标签三', type: 'info' },
+          { name: '标签四', type: 'warning' },
+          { name: '标签五', type: 'danger' }
+        ]
+      };
+    }
+  }
+</script> :component-demo-->
+          <pre v-pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span>
+  <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;tag in tags&quot;</span>
+  <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;tag.name&quot;</span>
+  <span class="hljs-attr">closable</span>
+  <span class="hljs-attr">:type</span>=<span class="hljs-string">&quot;tag.type&quot;</span>&gt;</span>
+  {{tag.name}}
+<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">tags</span>: [
+          { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;标签一&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;&#x27;</span> },
+          { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;标签二&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;success&#x27;</span> },
+          { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;标签三&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;info&#x27;</span> },
+          { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;标签四&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;warning&#x27;</span> },
+          { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;标签五&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;danger&#x27;</span> }
+        ]
+      };
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+</div>
+<h3>动态编辑标签</h3>
+<div class='component-demo-container'>
+                    <GuiDemoBlock>
+                      <template #demo-tip>
+                        动态编辑标签可以通过点击标签关闭按钮后触发的 `close` 事件来实现
+                      </template>
+                  </GuiDemoBlock>
+                  <!--component-demo: <el-tag
+  :key="tag"
+  v-for="tag in dynamicTags"
+  closable
+  :disable-transitions="false"
+  @close="handleClose(tag)">
+  {{tag}}
+</el-tag>
+<el-input
+  class="input-new-tag"
+  v-if="inputVisible"
+  v-model="inputValue"
+  ref="saveTagInput"
+  size="small"
+  @keyup.enter.native="handleInputConfirm"
+  @blur="handleInputConfirm"
+>
+</el-input>
+<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+
+<style>
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        dynamicTags: ['标签一', '标签二', '标签三'],
+        inputVisible: false,
+        inputValue: ''
+      };
+    },
     methods: {
-      hello() {
-        alert('Hello World!');
+      handleClose(tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       }
     }
   }
-&lt;/script&gt;
+</script> :component-demo-->
+          <pre v-pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span>
+  <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;tag&quot;</span>
+  <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;tag in dynamicTags&quot;</span>
+  <span class="hljs-attr">closable</span>
+  <span class="hljs-attr">:disable-transitions</span>=<span class="hljs-string">&quot;false&quot;</span>
+  @<span class="hljs-attr">close</span>=<span class="hljs-string">&quot;handleClose(tag)&quot;</span>&gt;</span>
+  {{tag}}
+<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-input</span>
+  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;input-new-tag&quot;</span>
+  <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;inputVisible&quot;</span>
+  <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;inputValue&quot;</span>
+  <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;saveTagInput&quot;</span>
+  <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;small&quot;</span>
+  @<span class="hljs-attr">keyup.enter.native</span>=<span class="hljs-string">&quot;handleInputConfirm&quot;</span>
+  @<span class="hljs-attr">blur</span>=<span class="hljs-string">&quot;handleInputConfirm&quot;</span>
+&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">el-input</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">v-else</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;button-new-tag&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;small&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;showInput&quot;</span>&gt;</span>+ New Tag<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+  <span class="hljs-selector-class">.el-tag</span> + <span class="hljs-selector-class">.el-tag</span> {
+    <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+  }
+  <span class="hljs-selector-class">.button-new-tag</span> {
+    <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">32px</span>;
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">30px</span>;
+    <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-selector-class">.input-new-tag</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">90px</span>;
+    <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">vertical-align</span>: bottom;
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">dynamicTags</span>: [<span class="hljs-string">&#x27;标签一&#x27;</span>, <span class="hljs-string">&#x27;标签二&#x27;</span>, <span class="hljs-string">&#x27;标签三&#x27;</span>],
+        <span class="hljs-attr">inputVisible</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">inputValue</span>: <span class="hljs-string">&#x27;&#x27;</span>
+      };
+    },
+    <span class="hljs-attr">methods</span>: {
+      <span class="hljs-function"><span class="hljs-title">handleClose</span>(<span class="hljs-params">tag</span>)</span> {
+        <span class="hljs-built_in">this</span>.dynamicTags.splice(<span class="hljs-built_in">this</span>.dynamicTags.indexOf(tag), <span class="hljs-number">1</span>);
+      },
+
+      <span class="hljs-function"><span class="hljs-title">showInput</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.inputVisible = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">this</span>.$nextTick(<span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> {
+          <span class="hljs-built_in">this</span>.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      <span class="hljs-function"><span class="hljs-title">handleInputConfirm</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">let</span> inputValue = <span class="hljs-built_in">this</span>.inputValue;
+        <span class="hljs-keyword">if</span> (inputValue) {
+          <span class="hljs-built_in">this</span>.dynamicTags.push(inputValue);
+        }
+        <span class="hljs-built_in">this</span>.inputVisible = <span class="hljs-literal">false</span>;
+        <span class="hljs-built_in">this</span>.inputValue = <span class="hljs-string">&#x27;&#x27;</span>;
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 </div>
-<h3>带有 icon</h3>
-<p>表示某种状态时提升可读性。</p>
+<h3>不同尺寸</h3>
+<p>Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。</p>
 <div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    通过设置`show-icon`属性来显示 Alert 的 icon，这能更有效地向用户展示你的显示意图。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;成功提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;消息提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;警告提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;错误提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;error&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;成功提示的文案&quot;
-    type=&quot;success&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;消息提示的文案&quot;
-    type=&quot;info&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;警告提示的文案&quot;
-    type=&quot;warning&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;错误提示的文案&quot;
-    type=&quot;error&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
+                    <GuiDemoBlock>
+                      <template #demo-tip>
+                        额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+                      </template>
+                  </GuiDemoBlock>
+                  <!--component-demo: <el-tag closable>默认标签</el-tag>
+<el-tag size="medium" closable>中等标签</el-tag>
+<el-tag size="small" closable>小型标签</el-tag>
+<el-tag size="mini" closable>超小标签</el-tag> :component-demo-->
+          <pre v-pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">closable</span>&gt;</span>默认标签<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;medium&quot;</span> <span class="hljs-attr">closable</span>&gt;</span>中等标签<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;small&quot;</span> <span class="hljs-attr">closable</span>&gt;</span>小型标签<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;mini&quot;</span> <span class="hljs-attr">closable</span>&gt;</span>超小标签<span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
 </code></pre>
 </div>
-<h3>文字居中</h3>
+<h3>不同主题</h3>
+<p>Tag 组件提供了三个不同的主题：<code>dark</code>、<code>light</code> 和 <code>plain</code></p>
 <div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    使用 `center` 属性让文字水平居中。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;成功提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;center
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;消息提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;center
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;警告提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;center
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;错误提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;error&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;center
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;成功提示的文案&quot;
-    type=&quot;success&quot;
-    center
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;消息提示的文案&quot;
-    type=&quot;info&quot;
-    center
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;警告提示的文案&quot;
-    type=&quot;warning&quot;
-    center
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;错误提示的文案&quot;
-    type=&quot;error&quot;
-    center
-    show-icon&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
-</code></pre>
+                    <GuiDemoBlock>
+                      <template #demo-tip>
+                        通过设置`effect`属性来改变主题，默认为 `light`
+                      </template>
+                  </GuiDemoBlock>
+                  <!--component-demo: <div class="tag-group">
+  <span class="tag-group__title">Dark</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="dark">
+    {{ item.label }}
+  </el-tag>
 </div>
-<h3>带有辅助性文字介绍</h3>
-<p>包含标题和内容，解释更详细的警告。</p>
-<div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    除了必填的`title`属性外，你可以设置`description`属性来帮助你更好地介绍，我们称之为辅助性文字。辅助性文字只能存放单行文本，会自动换行显示。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;带辅助性文字介绍&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。&nbsp;黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……&quot;&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;带辅助性文字介绍&quot;
-    type=&quot;success&quot;
-    description=&quot;这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……&quot;&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
-</code></pre>
+<div class="tag-group">
+  <span class="tag-group__title">Plain</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="plain">
+    {{ item.label }}
+  </el-tag>
 </div>
-<h3>带有 icon 和辅助性文字介绍</h3>
-<div class='component-demo-container'>
-                <GuiDemoBlock>
-                  <template #demo-tip>
-                    最后，这是一个同时具有 icon 和辅助性文字的样例。
-                    &lt;template&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;成功提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;success&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;消息提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;info&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;警告提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;warning&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&nbsp;&nbsp;&lt;el-alert
-&nbsp;&nbsp;&nbsp;&nbsp;title=&quot;错误提示的文案&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;type=&quot;error&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-&nbsp;&nbsp;&nbsp;&nbsp;show-icon&gt;
-&nbsp;&nbsp;&lt;/el-alert&gt;
-&lt;/template&gt;
-                  </template>
-              </GuiDemoBlock>
-      <pre><code class="language-html">&lt;template&gt;
-  &lt;el-alert
-    title=&quot;成功提示的文案&quot;
-    type=&quot;success&quot;
-    description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;消息提示的文案&quot;
-    type=&quot;info&quot;
-    description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;警告提示的文案&quot;
-    type=&quot;warning&quot;
-    description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-  &lt;el-alert
-    title=&quot;错误提示的文案&quot;
-    type=&quot;error&quot;
-    description=&quot;文字说明文字说明文字说明文字说明文字说明文字说明&quot;
-    show-icon&gt;
-  &lt;/el-alert&gt;
-&lt;/template&gt;
+
+<script>
+  export default {
+    data() {
+      return {
+        items: [
+          { type: '', label: '标签一' },
+          { type: 'success', label: '标签二' },
+          { type: 'info', label: '标签三' },
+          { type: 'danger', label: '标签四' },
+          { type: 'warning', label: '标签五' }
+        ]
+      }
+    }
+  }
+</script> :component-demo-->
+          <pre v-pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tag-group&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tag-group__title&quot;</span>&gt;</span>Dark<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span>
+    <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items&quot;</span>
+    <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.label&quot;</span>
+    <span class="hljs-attr">:type</span>=<span class="hljs-string">&quot;item.type&quot;</span>
+    <span class="hljs-attr">effect</span>=<span class="hljs-string">&quot;dark&quot;</span>&gt;</span>
+    {{ item.label }}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tag-group&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tag-group__title&quot;</span>&gt;</span>Plain<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">el-tag</span>
+    <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;item in items&quot;</span>
+    <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.label&quot;</span>
+    <span class="hljs-attr">:type</span>=<span class="hljs-string">&quot;item.type&quot;</span>
+    <span class="hljs-attr">effect</span>=<span class="hljs-string">&quot;plain&quot;</span>&gt;</span>
+    {{ item.label }}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">el-tag</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">items</span>: [
+          { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;标签一&#x27;</span> },
+          { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;标签二&#x27;</span> },
+          { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;info&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;标签三&#x27;</span> },
+          { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;danger&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;标签四&#x27;</span> },
+          { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;warning&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;标签五&#x27;</span> }
+        ]
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 </div>
 <h3>Attributes</h3>
@@ -380,24 +339,10 @@
 </thead>
 <tbody>
 <tr>
-<td>title</td>
-<td>标题</td>
-<td>string</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr>
 <td>type</td>
-<td>主题</td>
+<td>类型</td>
 <td>string</td>
-<td>success/warning/info/error</td>
-<td>info</td>
-</tr>
-<tr>
-<td>description</td>
-<td>辅助性文字。也可通过默认 slot 传入</td>
-<td>string</td>
-<td>—</td>
+<td>success/info/warning/danger</td>
 <td>—</td>
 </tr>
 <tr>
@@ -405,54 +350,42 @@
 <td>是否可关闭</td>
 <td>boolean</td>
 <td>—</td>
-<td>true</td>
+<td>false</td>
 </tr>
 <tr>
-<td>center</td>
-<td>文字是否居中</td>
-<td>boolean</td>
-<td>—</td>
-<td>true</td>
-</tr>
-<tr>
-<td>close-text</td>
-<td>关闭按钮自定义文本</td>
-<td>string</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr>
-<td>show-icon</td>
-<td>是否显示图标</td>
+<td>disable-transitions</td>
+<td>是否禁用渐变动画</td>
 <td>boolean</td>
 <td>—</td>
 <td>false</td>
 </tr>
 <tr>
-<td>effect</td>
-<td>选择提供的主题</td>
-<td>string</td>
-<td>light/dark</td>
-<td>light</td>
-</tr>
-</tbody>
-</table>
-<h3>Slot</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
+<td>hit</td>
+<td>是否有边框描边</td>
+<td>boolean</td>
 <td>—</td>
-<td>描述</td>
+<td>false</td>
 </tr>
 <tr>
-<td>title</td>
-<td>标题的内容</td>
+<td>color</td>
+<td>背景色</td>
+<td>string</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>size</td>
+<td>尺寸</td>
+<td>string</td>
+<td>medium / small / mini</td>
+<td>—</td>
+</tr>
+<tr>
+<td>effect</td>
+<td>主题</td>
+<td>string</td>
+<td>dark / light / plain</td>
+<td>light</td>
 </tr>
 </tbody>
 </table>
@@ -467,8 +400,13 @@
 </thead>
 <tbody>
 <tr>
+<td>click</td>
+<td>点击 Tag 时触发的事件</td>
+<td>—</td>
+</tr>
+<tr>
 <td>close</td>
-<td>关闭alert时触发的事件</td>
+<td>关闭 Tag 时触发的事件</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -487,16 +425,13 @@
   </script>
 
   <style lang='scss' scoped>
-  .component-demo-tip{
-    border:1px solid #ebebeb;
-    padding:20px 10px;
-    font-weight: bold;
-    color:#5e6d82;
+  .hljs{
+    overflow:auto
   }
-  .language-html{
-    color:#3182bd
-  }
-  .component-demo-container{
-
-  }
+  .hljs-tag,.hljs-name,.hljs-attr{color:#3182bd}
+  .hljs-string{color:#756bb1}
+    .component-demo-container{
+      padding:10px;
+      border:1px solid #ebebeb
+    }
   </style>

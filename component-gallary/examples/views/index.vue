@@ -1,6 +1,6 @@
 .<template>
-  <div class='sh-ui'>
-     <SuiGrid type="header-main">
+  <div class='g-ui'>
+     <SuiGrid class="g-ui-container" type="header-main">
        <template #header>
          <div  class="full-height" style="height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;">
            <h2>g-UI组件库</h2>
@@ -8,7 +8,7 @@
          </div>
        </template>
        <template #main>
-         <SuiGrid type="aside-main">
+         <SuiGrid type="aside-main" asideWidth='260' >
            <template #aside>
              <div class="full-height" >
                组件列表
@@ -37,8 +37,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .sh-ui{
+  .g-ui{
     height: 100vh;
     overflow: auto;
+  }
+  .g-ui-container{
+    max-width: 1200px;
+    margin: 0 auto;
   }
 </style>

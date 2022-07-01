@@ -1,96 +1,122 @@
-## Alert 警告
+## Tag 标签
 
-用于页面中展示重要的提示信息。
+用于标记和选择。
 
-### 基本用法
+### 基础用法
 
-页面中的非浮层元素，不会自动消失。
+:::demo 由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
 
-:::demo Alert 组件提供四种主题，由`type`属性指定，默认值为`info`。
 ```html
-<template>
-  <el-alert
-    title="成功提示的文案"
-    type="success">
-  </el-alert>
-  <el-alert
-    title="消息提示的文案"
-    type="info">
-  </el-alert>
-  <el-alert
-    title="警告提示的文案"
-    type="warning">
-  </el-alert>
-  <el-alert
-    title="错误提示的文案"
-    type="error">
-  </el-alert>
-</template>
+<el-tag>标签一</el-tag>
+<el-tag type="success">标签二</el-tag>
+<el-tag type="info">标签三</el-tag>
+<el-tag type="warning">标签四</el-tag>
+<el-tag type="danger">标签五</el-tag>
 ```
 :::
 
-### 主题
+### 可移除标签
 
-Alert 组件提供了两个不同的主题：`light`和`dark`。
+:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
 
-:::demo 通过设置`effect`属性来改变主题，默认为`light`。
 ```html
-<template>
-  <el-alert
-    title="成功提示的文案"
-    type="success"
-    effect="dark">
-  </el-alert>
-  <el-alert
-    title="消息提示的文案"
-    type="info"
-    effect="dark">
-  </el-alert>
-  <el-alert
-    title="警告提示的文案"
-    type="warning"
-    effect="dark">
-  </el-alert>
-  <el-alert
-    title="错误提示的文案"
-    type="error"
-    effect="dark">
-  </el-alert>
-</template>
-```
-:::
-
-
-
-### 自定义关闭按钮
-
-自定义关闭按钮为文字或其他符号。
-
-:::demo 在 Alert 组件中，你可以设置是否可关闭，关闭按钮的文本以及关闭时的回调函数。`closable`属性决定是否可关闭，接受`boolean`，默认为`true`。你可以设置`close-text`属性来代替右侧的关闭图标，注意：`close-text`必须为文本。设置`close`事件来设置关闭时的回调。
-```html
-<template>
-  <el-alert
-    title="不可关闭的 alert"
-    type="success"
-    :closable="false">
-  </el-alert>
-  <el-alert
-    title="自定义 close-text"
-    type="info"
-    close-text="知道了">
-  </el-alert>
-  <el-alert
-    title="设置了回调的 alert"
-    type="warning"
-    @close="hello">
-  </el-alert>
-</template>
+<el-tag
+  v-for="tag in tags"
+  :key="tag.name"
+  closable
+  :type="tag.type">
+  {{tag.name}}
+</el-tag>
 
 <script>
   export default {
+    data() {
+      return {
+        tags: [
+          { name: '标签一', type: '' },
+          { name: '标签二', type: 'success' },
+          { name: '标签三', type: 'info' },
+          { name: '标签四', type: 'warning' },
+          { name: '标签五', type: 'danger' }
+        ]
+      };
+    }
+  }
+</script>
+```
+:::
+
+### 动态编辑标签
+
+
+:::demo 动态编辑标签可以通过点击标签关闭按钮后触发的 `close` 事件来实现
+```html
+<el-tag
+  :key="tag"
+  v-for="tag in dynamicTags"
+  closable
+  :disable-transitions="false"
+  @close="handleClose(tag)">
+  {{tag}}
+</el-tag>
+<el-input
+  class="input-new-tag"
+  v-if="inputVisible"
+  v-model="inputValue"
+  ref="saveTagInput"
+  size="small"
+  @keyup.enter.native="handleInputConfirm"
+  @blur="handleInputConfirm"
+>
+</el-input>
+<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+
+<style>
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        dynamicTags: ['标签一', '标签二', '标签三'],
+        inputVisible: false,
+        inputValue: ''
+      };
+    },
     methods: {
-      hello() {
-        alert('Hello World!');
+      handleClose(tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       }
     }
   }
@@ -98,140 +124,79 @@ Alert 组件提供了两个不同的主题：`light`和`dark`。
 ```
 :::
 
-### 带有 icon
+### 不同尺寸
 
-表示某种状态时提升可读性。
+Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
 
-:::demo 通过设置`show-icon`属性来显示 Alert 的 icon，这能更有效地向用户展示你的显示意图。
+:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+
 ```html
-<template>
-  <el-alert
-    title="成功提示的文案"
-    type="success"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="消息提示的文案"
-    type="info"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="警告提示的文案"
-    type="warning"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="错误提示的文案"
-    type="error"
-    show-icon>
-  </el-alert>
-</template>
+<el-tag closable>默认标签</el-tag>
+<el-tag size="medium" closable>中等标签</el-tag>
+<el-tag size="small" closable>小型标签</el-tag>
+<el-tag size="mini" closable>超小标签</el-tag>
 ```
 :::
 
-### 文字居中
+### 不同主题
 
+Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 
-:::demo 使用 `center` 属性让文字水平居中。
+:::demo 通过设置`effect`属性来改变主题，默认为 `light`
 ```html
-<template>
-  <el-alert
-    title="成功提示的文案"
-    type="success"
-    center
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="消息提示的文案"
-    type="info"
-    center
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="警告提示的文案"
-    type="warning"
-    center
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="错误提示的文案"
-    type="error"
-    center
-    show-icon>
-  </el-alert>
-</template>
-```
-:::
+<div class="tag-group">
+  <span class="tag-group__title">Dark</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="dark">
+    {{ item.label }}
+  </el-tag>
+</div>
+<div class="tag-group">
+  <span class="tag-group__title">Plain</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="plain">
+    {{ item.label }}
+  </el-tag>
+</div>
 
-### 带有辅助性文字介绍
-
-包含标题和内容，解释更详细的警告。
-
-:::demo 除了必填的`title`属性外，你可以设置`description`属性来帮助你更好地介绍，我们称之为辅助性文字。辅助性文字只能存放单行文本，会自动换行显示。
-```html
-<template>
-  <el-alert
-    title="带辅助性文字介绍"
-    type="success"
-    description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……">
-  </el-alert>
-</template>
-```
-:::
-
-### 带有 icon 和辅助性文字介绍
-
-:::demo 最后，这是一个同时具有 icon 和辅助性文字的样例。
-```html
-<template>
-  <el-alert
-    title="成功提示的文案"
-    type="success"
-    description="文字说明文字说明文字说明文字说明文字说明文字说明"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="消息提示的文案"
-    type="info"
-    description="文字说明文字说明文字说明文字说明文字说明文字说明"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="警告提示的文案"
-    type="warning"
-    description="文字说明文字说明文字说明文字说明文字说明文字说明"
-    show-icon>
-  </el-alert>
-  <el-alert
-    title="错误提示的文案"
-    type="error"
-    description="文字说明文字说明文字说明文字说明文字说明文字说明"
-    show-icon>
-  </el-alert>
-</template>
+<script>
+  export default {
+    data() {
+      return {
+        items: [
+          { type: '', label: '标签一' },
+          { type: 'success', label: '标签二' },
+          { type: 'info', label: '标签三' },
+          { type: 'danger', label: '标签四' },
+          { type: 'warning', label: '标签五' }
+        ]
+      }
+    }
+  }
+</script>
 ```
 :::
 
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title     | 标题           | string | — | — |
-| type | 主题 | string | success/warning/info/error | info |
-| description | 辅助性文字。也可通过默认 slot 传入 | string | — | — |
-| closable | 是否可关闭 | boolean | — | true |
-| center | 文字是否居中 | boolean | — | true |
-| close-text | 关闭按钮自定义文本 | string | — | — |
-| show-icon | 是否显示图标 | boolean | — | false |
-| effect | 选择提供的主题 | string | light/dark | light |
+| type | 类型 | string | success/info/warning/danger | — |
+| closable | 是否可关闭 | boolean | — | false |
+| disable-transitions | 是否禁用渐变动画 | boolean | — | false |
+| hit | 是否有边框描边 | boolean | — | false |
+| color | 背景色 | string | — | — |
+| size | 尺寸 | string | medium / small / mini | — |
+| effect | 主题 | string | dark / light / plain | light |
 
-### Slot
-
-| Name | Description |
-|------|--------|
-| — | 描述 |
-| title | 标题的内容 |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| close | 关闭alert时触发的事件 | — |
+| click | 点击 Tag 时触发的事件 | — |
+| close | 关闭 Tag 时触发的事件 | — |

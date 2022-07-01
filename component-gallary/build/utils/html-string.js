@@ -10,6 +10,25 @@ function HTMLTransferToString(htmlCode) {
   return s;
 }
 
+function stripTemplate(content) {
+  content = content.trim()
+  if (!content) {
+    return content
+  }
+  return content.replace(/<(script|style)[\s\S]+<\/\1>/g, '').trim()
+}
+
+function getTemplateContent(){
+
+}
+
+function getScriptContent(){
+
+}
+
+function getStyleContent(){
+
+}
 module.exports = {
-  HTMLTransferToString
+  HTMLTransferToString,stripTemplate
 }

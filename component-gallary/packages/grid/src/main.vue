@@ -13,7 +13,7 @@
       <div class="overflow-auto"><slot name="main"></slot></div>
       <div class="overflow-auto"><slot name="footer"></slot></div>
     </div>
-    <div class="full-height aside-main" v-if="type==='aside-main'">
+    <div class="full-height aside-main" :style="{display: 'grid', 'grid-template-columns': `${parseInt(asideWidth)}px 1fr`}" v-if="type==='aside-main'">
       <div class="overflow-auto"><slot name="aside"></slot></div>
       <div class="overflow-auto"><slot name="main"></slot></div>
     </div>
@@ -27,7 +27,12 @@ export default {
     type:{
       type:String,
     },
-
+    asideWidth:{
+      type:[String,Number],
+      default(){
+        return 200
+      }
+    }
   }
 }
 </script>
@@ -44,9 +49,5 @@ export default {
   .main-footer{
     display: grid;
     grid-template-rows: 1fr 80px;
-  }
-  .aside-main{
-    display: grid;
-    grid-template-columns: 200px 1fr;
   }
 </style>
